@@ -16,6 +16,9 @@ public class SubmitImagineDTO extends BaseSubmitDTO {
 	@ApiModelProperty(value = "提示词", required = true, example = "Cat")
 	private String prompt;
 
+	@ApiModelProperty(value = "反向提示词", required = false, example = "Ugly")
+	private String negativePrompt;
+
 	@ApiModelProperty(value = "垫图base64数组")
 	private List<String> base64Array;
 

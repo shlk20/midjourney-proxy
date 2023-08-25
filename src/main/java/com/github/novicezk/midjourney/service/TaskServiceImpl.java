@@ -1,5 +1,6 @@
 package com.github.novicezk.midjourney.service;
 
+import cn.hutool.core.text.CharSequenceUtil;
 import com.github.novicezk.midjourney.Constants;
 import com.github.novicezk.midjourney.ReturnCode;
 import com.github.novicezk.midjourney.enums.BlendDimensions;
@@ -46,6 +47,10 @@ public class TaskServiceImpl implements TaskService {
 				task.setPromptEn(String.join(" ", imageUrls) + " " + task.getPromptEn());
 				task.setDescription("/imagine " + task.getPrompt());
 				this.taskStoreService.save(task);
+			}
+			if (CharSequenceUtil.isNotBlank(task.getNegativePromptEn())) {
+				task.setPrompt(task.getPrompt() + " --no " + task.getNegativePrompt());
+				task.setPromptEn(task.getPromptEn() + " --no " + task.getNegativePromptEn());
 			}
 			return this.discordService.imagine(task.getPromptEn(), task.getPropertyGeneric(Constants.TASK_PROPERTY_NONCE));
 		});

@@ -25,6 +25,10 @@ public class Task implements Serializable {
 	private String prompt;
 	@ApiModelProperty("提示词-英文")
 	private String promptEn;
+	@ApiModelProperty("反向提示词")
+	private String negativePrompt;
+	@ApiModelProperty("反向提示词-英文")
+	private String negativePromptEn;
 
 	@ApiModelProperty("任务描述")
 	private String description;

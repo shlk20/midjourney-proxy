@@ -70,6 +70,13 @@ public class SubmitController {
 			return SubmitResultVO.fail(ReturnCode.BANNED_PROMPT, "可能包含敏感词")
 					.setProperty("promptEn", promptEn).setProperty("bannedWord", e.getMessage());
 		}
+		String negativePrompt = imagineDTO.getNegativePrompt();
+		if (CharSequenceUtil.isNotBlank(negativePrompt)) {
+			negativePrompt = negativePrompt.trim();
+			task.setNegativePrompt(negativePrompt);
+			String negativePromptEn = translatePrompt(negativePrompt);
+			task.setNegativePromptEn(negativePromptEn);
+		}
 		List<String> base64Array = Optional.ofNullable(imagineDTO.getBase64Array()).orElse(new ArrayList<>());
 		if (CharSequenceUtil.isNotBlank(imagineDTO.getBase64())) {
 			base64Array.add(imagineDTO.getBase64());
